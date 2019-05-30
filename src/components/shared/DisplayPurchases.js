@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
 class DisplayPurchases extends Component {
+
+  removePurchase = (id) => {
+    this.props.removePurchase(id)
+    this.props.requestPurchases()
+
+  }
   render() {
     let { purchases } = this.props;
     if (!purchases) purchases = [{ id: 1000, description: 'Ship', price: 1, category: 'Other' }]
@@ -12,7 +18,7 @@ class DisplayPurchases extends Component {
               <div className="card mb-2" key={purchase.id}>
                 <div className="card-body">
                   ${purchase.price} for {purchase.description} <strong>({purchase.category})</strong>
-                  <button onClick={() => this.props.removePurchase(purchase.id)} className='btn btn-sm btn-danger' id='delete-btn'>X</button>
+                  <button onClick={() => this.removePurchase(purchase.id)} className='btn btn-sm btn-danger' id='delete-btn'>X</button>
                 </div>
               </div>
             )

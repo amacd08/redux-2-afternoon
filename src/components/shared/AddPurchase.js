@@ -17,7 +17,7 @@ class AddPurchase extends Component {
 
   add() {
     let { price, category, description } = this.state;
-    let { addPurchase } = this.props;
+    let { addPurchase, purchases } = this.props;
     if (!addPurchase) addPurchase = () => alert("Missing prop: addPurchase (AddPurchase.js)")
     let num = parseInt(price);
     if (num < 0) return alert('Cannot have price less than zero.')
@@ -25,6 +25,7 @@ class AddPurchase extends Component {
       if (num && category && description) {
         if (!addPurchase) return this.backup();
         addPurchase(num, description, category);
+        this.props.requestPurchases()
         this.setState({
           category: 'other',
           description: '',
